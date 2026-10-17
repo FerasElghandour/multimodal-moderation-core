@@ -59,3 +59,7 @@ See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) fo
 A score threshold is a policy decision, not calibrated model quality. Provider callbacks still need modality-specific evaluation. Failing closed can overblock harmless content, and the analytics do not measure model fairness or production performance.
 
 No client deployment, commercial outcome, or new live-provider performance is inferred from the component tests.
+
+## Reuse
+
+The original contributions listed in [LICENSING.md](LICENSING.md) are available under [MIT](LICENSE). This scoped grant preserves upstream notices and separate dataset, simulator, notebook and checkpoint terms.
