@@ -1,18 +1,29 @@
 # Multimodal Moderation Decision Core
 
-**Feras Elghandour** · Technical case study
-
 Apply consistent moderation policy across text, image, audio, and video while keeping provider failures visible in aggregate metrics.
 
 ## Implementation
 
 Typed assessments, score validation, configurable decision thresholds, fail-closed provider errors, and content-free moderation analytics.
 
-```mermaid
-flowchart LR
-    A[Validated inputs] --> B[Core implementation]
-    B --> C[Behavior and error checks]
-    C --> D[Inspectable outcome]
+![Implementation mechanism: Provider callback response → Validate finite bounded typed scores → Redact provider failures as unavailable → Thresholds and fail-closed policy → Decision plus content-free aggregate metrics](assets/mechanism.svg)
+
+## Try a small example
+
+A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
+
+After the local setup below, run from the repository root:
+
+```sh
+python examples/quickstart.py
+```
+
+The [example source](examples/quickstart.py), [captured output](examples/expected-output.txt) and [execution record](examples/environment.json) keep this demonstration inspectable. Floating-point values may vary with library versions.
+
+Observed output from this run:
+
+```text
+{'total': 3, 'blocked': 2, 'blocked_fraction': 0.6666666666666666, 'errors': 1, 'modalities': {'text': 1, 'image': 1, 'video': 1}, 'categories': {'abuse': 1}}
 ```
 
 ## Evidence and results
@@ -32,7 +43,7 @@ python -m pip install -r requirements.txt
 python smoke_test.py
 ```
 
-See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) for the verification scope. The modules expose small APIs that can be integrated into a larger workflow.
+See [DATA.md](DATA.md) for input contracts and [VALIDATION.md](VALIDATION.md) for the verification scope. 
 
 ## Practical relevance and limitations
 
