@@ -14,6 +14,7 @@ class Assessment:
     error:str|None=None
     def __post_init__(self):
         if self.modality not in MODALITIES:raise ValueError('Unsupported modality')
+        if not self.error and not self.scores:raise ValueError('Successful assessments require category scores')
         if any(not isinstance(v,(int,float)) or not math.isfinite(v) or not 0<=v<=1 for v in self.scores.values()):raise ValueError('Category scores must be finite values in [0,1]')
         object.__setattr__(self,'scores',MappingProxyType(dict(self.scores)))
 
@@ -44,3 +45,4 @@ def summarize(decisions):
     blocked=sum(r.blocked for r in rows)
     return {'total':len(rows),'blocked':blocked,'blocked_fraction':blocked/len(rows) if rows else 0.,
        'errors':sum(r.error for r in rows),'modalities':dict(modes),'categories':dict(categories)}
+

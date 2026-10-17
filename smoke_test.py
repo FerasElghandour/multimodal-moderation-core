@@ -17,3 +17,7 @@ assessment=Assessment('text',source)
 source['abuse']=1.
 assert not decide(assessment).blocked
 print('Assessment scores remain unchanged when caller input is mutated.')
+
+
+empty=assess('fixture','text',lambda p,m:Assessment('text',{}))
+assert decide(empty).blocked and decide(empty).error

@@ -8,6 +8,15 @@ Typed assessments, score validation, configurable decision thresholds, fail-clos
 
 ![Implementation mechanism: Provider callback response → Validate finite bounded typed scores → Redact provider failures as unavailable → Thresholds and fail-closed policy → Decision plus content-free aggregate metrics](assets/mechanism.svg)
 
+
+
+## Validate moderation-provider contracts
+
+An empty successful provider assessment now becomes an unavailable assessment and follows the declared fail-closed policy. The malformed-response regression is included.
+
+[Commands, artifacts and benchmark scope](BENCHMARKS.md) · [Versioned profiles](reproduction.json)
+
+
 ## Try a small example
 
 A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
