@@ -2,6 +2,7 @@
 import math
 from dataclasses import dataclass
 from collections import Counter
+from types import MappingProxyType
 
 MODALITIES={'text','image','audio','video'}
 
@@ -14,6 +15,7 @@ class Assessment:
     def __post_init__(self):
         if self.modality not in MODALITIES:raise ValueError('Unsupported modality')
         if any(not isinstance(v,(int,float)) or not math.isfinite(v) or not 0<=v<=1 for v in self.scores.values()):raise ValueError('Category scores must be finite values in [0,1]')
+        object.__setattr__(self,'scores',MappingProxyType(dict(self.scores)))
 
 @dataclass(frozen=True)
 class Decision:

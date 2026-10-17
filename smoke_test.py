@@ -11,3 +11,9 @@ except ValueError:pass
 else:raise AssertionError('Nonfinite provider score accepted')
 assert summarize([])['blocked_fraction']==0
 print('Threshold decisions, fail-closed errors, aggregate accounting, and score validation passed.')
+
+source={'abuse':.1}
+assessment=Assessment('text',source)
+source['abuse']=1.
+assert not decide(assessment).blocked
+print('Assessment scores remain unchanged when caller input is mutated.')
